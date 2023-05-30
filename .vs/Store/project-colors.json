@@ -1,0 +1,26 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "a07ebadd-39a6-475b-87f1-8e3ad1ed6511": {
+      "ProjectGuid": "a07ebadd-39a6-475b-87f1-8e3ad1ed6511",
+      "DisplayName": "Store",
+      "ColorIndex": 0
+    },
+    "35d52bc9-db7c-40c2-b34e-138d01637b22": {
+      "ProjectGuid": "35d52bc9-db7c-40c2-b34e-138d01637b22",
+      "DisplayName": "Store.Repository",
+      "ColorIndex": 1
+    },
+    "3c6c9b5e-d395-47ce-9bcd-1bb1ad6e93db": {
+      "ProjectGuid": "3c6c9b5e-d395-47ce-9bcd-1bb1ad6e93db",
+      "DisplayName": "Store.Entity",
+      "ColorIndex": 2
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    }
+  },
+  "NextColorIndex": 3
+}

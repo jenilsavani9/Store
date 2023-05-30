@@ -1,0 +1,17 @@
+D:\jenil\Store\Store.Repository\bin\Debug\net6.0\Store.Repository.deps.json
+D:\jenil\Store\Store.Repository\bin\Debug\net6.0\Store.Repository.runtimeconfig.json
+D:\jenil\Store\Store.Repository\bin\Debug\net6.0\Store.Repository.dll
+D:\jenil\Store\Store.Repository\bin\Debug\net6.0\ref\Store.Repository.dll
+D:\jenil\Store\Store.Repository\bin\Debug\net6.0\Store.Repository.pdb
+D:\jenil\Store\Store.Repository\bin\Debug\net6.0\Store.Entity.dll
+D:\jenil\Store\Store.Repository\bin\Debug\net6.0\Store.Entity.pdb
+D:\jenil\Store\Store.Repository\obj\Debug\net6.0\Store.Repository.csproj.AssemblyReference.cache
+D:\jenil\Store\Store.Repository\obj\Debug\net6.0\Store.Repository.GeneratedMSBuildEditorConfig.editorconfig
+D:\jenil\Store\Store.Repository\obj\Debug\net6.0\Store.Repository.AssemblyInfoInputs.cache
+D:\jenil\Store\Store.Repository\obj\Debug\net6.0\Store.Repository.AssemblyInfo.cs
+D:\jenil\Store\Store.Repository\obj\Debug\net6.0\Store.Repository.csproj.CoreCompileInputs.cache
+D:\jenil\Store\Store.Repository\obj\Debug\net6.0\Store.Repository.csproj.CopyComplete
+D:\jenil\Store\Store.Repository\obj\Debug\net6.0\Store.Repository.dll
+D:\jenil\Store\Store.Repository\obj\Debug\net6.0\ref\Store.Repository.dll
+D:\jenil\Store\Store.Repository\obj\Debug\net6.0\Store.Repository.pdb
+D:\jenil\Store\Store.Repository\obj\Debug\net6.0\Store.Repository.genruntimeconfig.cache
