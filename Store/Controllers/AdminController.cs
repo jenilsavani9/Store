@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Store.Entity.Models;
 using Store.Entity.ViewModels;
 using Store.Repository.Interface;
 
@@ -19,7 +20,7 @@ namespace Store.Controllers
             _configuration = Configuration;
         }
 
-        [HttpPost("")]
+        [HttpPost("User/Add")]
         [Authorize(Roles = "admin")]
         public async Task<ActionResult<AddUserModel>> AddUser(AddUserModel user)
         {
@@ -31,6 +32,14 @@ namespace Store.Controllers
             var NewUser = _AdminRepository.AddUser(user);
             _AdminRepository.SendMail(NewUser);
             return await Task.FromResult(user);
+        }
+
+        [HttpPost("Country/Add")]
+        [Authorize(Roles = "admin")]
+        public object AddCountry(Country country)
+        {
+
+            return Ok(new {  });
         }
     }
 }

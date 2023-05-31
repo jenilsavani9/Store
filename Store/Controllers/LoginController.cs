@@ -40,7 +40,10 @@ namespace Store.Controllers
                         new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                         new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
                         new Claim("UserId", user.UserId.ToString()),
-                        new Claim("role", user.Roles!)
+                        new Claim("role", user.Roles!),
+                        new Claim("FirstName", user.FirstName!),
+                        new Claim("LastName", user.LastName!),
+                        new Claim("Email", user.Email!)
                     };
 
                     var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]!));

@@ -26,4 +26,6 @@ public partial class User
     public DateTime? DeletedAt { get; set; }
 
     public virtual ICollection<MailToken> MailTokens { get; set; } = new List<MailToken>();
+
+    public virtual ICollection<UserStore> UserStores { get; set; } = new List<UserStore>();
 }
