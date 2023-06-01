@@ -9,7 +9,7 @@ namespace Store.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AdminController : ControllerBase
+    public class AdminController : Controller
     {
         private readonly IAdminRepository _AdminRepository;
         private readonly IConfiguration _configuration;
@@ -34,12 +34,29 @@ namespace Store.Controllers
             return await Task.FromResult(user);
         }
 
-        [HttpPost("Country/Add")]
+        [HttpPost("User/Get")]
         [Authorize(Roles = "admin")]
-        public object AddCountry(Country country)
+        public IActionResult GetUsers(int pageIndex, string search)
         {
-
-            return Ok(new {  });
+            var result = _AdminRepository.GetUsersList(pageIndex, search);
+            var userCount = _AdminRepository.GetUserCount();
+            return Json(new { result, userCount });
         }
+
+        [HttpPost("User/Delete")]
+        [Authorize(Roles = "admin")]
+        public IActionResult DeleteUsers(int userId)
+        {
+            var result = _AdminRepository.DeleteUser(userId);
+            return Json(new { result });
+        }
+
+        //[HttpPost("Country/Add")]
+        //[Authorize(Roles = "admin")]
+        //public object AddCountry(Country country)
+        //{
+
+        //    return Ok(new {  });
+        //}
     }
 }

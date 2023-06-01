@@ -64,9 +64,9 @@ namespace Store.Repository.Repository
             _db.MailTokens.Add(EmailValid);
             _db.SaveChanges();
 
-            var resetLink = "https://localhost:44372/api/Login/validate?UserId=" + user.UserId + "&token=" + token;
+            var resetLink = "http://localhost:3000/verify?UserId=" + user.UserId + "&token=" + token;
 
-            var fromAddress = new MailAddress("jenilsavani8@gmail.com", "ASP");
+            var fromAddress = new MailAddress("jenilsavani8@gmail.com", "Store Inc.");
             var toAddress = new MailAddress(user.Email);
             var subject = "Store Email Verify";
             var body = $"Hi,<br /><br />Please click on the following link to Validate Mail ID:<br /><br /><a href='{resetLink}'>{resetLink}</a>";
@@ -85,6 +85,45 @@ namespace Store.Repository.Repository
             smtpClient.Send(message);
 
             return true;
+        }
+
+        // users list
+        public object GetUsersList(int pageIndex, string search)
+        {
+            var users = from r in _db.Users.AsEnumerable() select new
+            {
+                r.UserId,
+                r.FirstName,
+                r.LastName,
+                r.Email,
+                r.Status,
+                r.Roles,
+            };
+            var UserCount = users.Count();
+            return users.Skip(pageIndex * 10).Take(10).ToList();
+        }
+
+        public int GetUserCount()
+        {
+            var userCount = _db.Users.Count();
+            return userCount;
+        }
+
+        public string DeleteUser(int UserId)
+        {
+            var user = _db.Users.FirstOrDefault(x => x.UserId == UserId);
+            if(user == null)
+            {
+                return "User Not Found";
+            }
+            if(user.Status == "deactive")
+            {
+                return "User Already Deleted";
+            }
+            user.Status = "deactive";
+            user.DeletedAt = DateTime.Now;
+            _db.SaveChanges();
+            return "User Deleted Successfully";
         }
     }
 }

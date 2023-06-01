@@ -11,7 +11,7 @@ namespace Store.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LoginController : ControllerBase
+    public class LoginController : Controller
     {
         private readonly ILoginRepository _LoginRepository;
         private readonly IConfiguration _configuration;

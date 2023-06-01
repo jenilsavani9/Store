@@ -15,5 +15,11 @@ namespace Store.Repository.Interface
         public User AddUser(AddUserModel user);
 
         public bool SendMail(User user);
+
+        public object GetUsersList(int pageIndex, string search);
+
+        public int GetUserCount();
+
+        public string DeleteUser(int UserId);
     }
 }
