@@ -11,6 +11,12 @@ namespace Store.Repository.Interface
     {
         public User GetUser(string EmailId, string Password);
 
-        public string ValidateEmail(int UserId, string token);
+        public bool ValidateEmail(int UserId, string token);
+
+        public object? GetUserById(int UserId);
+
+        public bool ResetPassword(long UserId, string newPassword);
+
+        public void UpdateLoginDetails(long UserId, string LoginDetails);
     }
 }

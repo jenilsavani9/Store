@@ -49,14 +49,19 @@ namespace Store.Repository.Repository
             }
         }
 
-        public bool SendMail(User user)
+        public bool SendMail(AddUserModel user)
         {
             var token = Guid.NewGuid().ToString();
 
             // Store the token in the email token table with the user's email
+            var TempUser = _db.Users.FirstOrDefault(u => u.Email == user.Email);
+            if(TempUser == null)
+            {
+                return false;
+            }
             var EmailValid = new MailToken
             {
-                UserId = user.UserId,
+                UserId = TempUser.UserId,
                 Token = token,
                 CreatedAt = DateTime.Now,
             };
@@ -64,12 +69,14 @@ namespace Store.Repository.Repository
             _db.MailTokens.Add(EmailValid);
             _db.SaveChanges();
 
-            var resetLink = "http://localhost:3000/verify?UserId=" + user.UserId + "&token=" + token;
+            var resetLink = "http://localhost:3000/verify?UserId=" + TempUser.UserId + "&token=" + token;
 
             var fromAddress = new MailAddress("jenilsavani8@gmail.com", "Store Inc.");
             var toAddress = new MailAddress(user.Email);
             var subject = "Store Email Verify";
-            var body = $"Hi,<br /><br />Please click on the following link to Validate Mail ID:<br /><br /><a href='{resetLink}'>{resetLink}</a>";
+            var body = $"Hi,<br /><br />Please click on the following link to Validate Mail ID:<br /><br />" +
+                $"<a href='{resetLink}'>{resetLink}</a><br /> Please, Use Below Credentionals to login into your account.<br />" +
+                $"Email: {user.Email}<br/>Password : {user.Password}<br/> Thank You!!!";
             var message = new MailMessage(fromAddress, toAddress)
             {
                 Subject = subject,

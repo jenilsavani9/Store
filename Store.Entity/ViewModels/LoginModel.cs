@@ -15,5 +15,7 @@ namespace Store.Entity.ViewModels
 
         [Required()]
         public string Password { get; set; } = null!;
+
+        public string? LastLogin { get; set; }
     }
 }

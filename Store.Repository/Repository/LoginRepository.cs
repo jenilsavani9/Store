@@ -23,23 +23,71 @@ namespace Store.Repository.Repository
             return _db.Users.FirstOrDefault(u => u.Email == Email && u.DeletedAt == null && u.Status == "active")!;
         }
 
-        public string ValidateEmail(int UserId, string token)
+        public bool ValidateEmail(int UserId, string token)
         {
             var Entry = _db.MailTokens.FirstOrDefault(e => e.UserId == UserId && e.DeletedAt == null);
             if (Entry == null || Entry!.Token != token)
             {
-                return "Link Is not valid";
+                return false;
+            }
+            if(Entry.CreatedAt.AddHours(24) <= DateTime.Now)
+            {
+                Entry.DeletedAt = DateTime.Now;
+                _db.SaveChanges();
+                return false;
             }
             var user = _db.Users.FirstOrDefault(u => u.UserId == Entry.UserId && u.DeletedAt == null);
             if(user == null)
             {
-                return "Link Is not valid";
+                return false;
             }
             user.Status = "active";
             Entry.DeletedAt = DateTime.Now;
             _db.SaveChanges();
-            return "Email Verified.";
+            return true;
 
+        }
+
+        public object? GetUserById(int UserId)
+        {
+            var User = from u in _db.Users.AsEnumerable()
+                        where u.UserId == UserId
+                        select new
+                        {
+                            u.UserId,
+                            u.FirstName,
+                            u.LastName,
+                            u.Email,
+                            u.LastLogin
+                        };
+            if(User == null)
+            {
+                return null;
+            }
+            return User;
+        }
+
+        public bool ResetPassword(long UserId, string newPassword)
+        {
+            var user = _db.Users.FirstOrDefault(u => u.UserId == UserId);
+            if(null == user || newPassword.Length < 5)
+            {
+                return false;
+            }
+            user.Password = BCrypt.Net.BCrypt.HashPassword(newPassword);
+            user.UpdatedAt = DateTime.Now;
+            _db.SaveChanges();
+            return true;
+        }
+
+        public void UpdateLoginDetails(long UserId, string LoginDetails)
+        {
+            var user = _db.Users.FirstOrDefault(u => u.UserId == UserId);
+            if (null != user)
+            {
+                user.LastLogin = LoginDetails;
+                _db.SaveChanges();
+            }
         }
     }
 }

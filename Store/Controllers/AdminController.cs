@@ -30,7 +30,7 @@ namespace Store.Controllers
                 return BadRequest("Email Already Registered.");
             }
             var NewUser = _AdminRepository.AddUser(user);
-            _AdminRepository.SendMail(NewUser);
+            _AdminRepository.SendMail(user);
             return await Task.FromResult(user);
         }
 

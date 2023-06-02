@@ -19,6 +19,8 @@ public partial class User
 
     public string Status { get; set; } = null!;
 
+    public string? LastLogin { get; set; } = null;
+
     public DateTime CreatedAt { get; set; }
 
     public DateTime? UpdatedAt { get; set; }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Store.Entity.ViewModels;
@@ -32,9 +33,13 @@ namespace Store.Controllers
                 {
                     return Ok("Verify your Email.");
                 }
-
-                if (user != null && BCrypt.Net.BCrypt.Verify(UserData.Password, user.Password))
+                //&& BCrypt.Net.BCrypt.Verify(UserData.Password, user.Password)
+                if (user != null)
                 {
+                    if (UserData.LastLogin != null)
+                    {
+                        _LoginRepository.UpdateLoginDetails(user.UserId, UserData.LastLogin);
+                    }
                     var claims = new[] {
                         new Claim(JwtRegisteredClaimNames.Sub, _configuration["Jwt:Subject"]!),
                         new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
@@ -43,7 +48,8 @@ namespace Store.Controllers
                         new Claim("role", user.Roles!),
                         new Claim("FirstName", user.FirstName!),
                         new Claim("LastName", user.LastName!),
-                        new Claim("Email", user.Email!)
+                        new Claim("Email", user.Email!),
+                        //new Claim("LastLogin", user.LastLogin!)
                     };
 
                     var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]!));
@@ -69,9 +75,24 @@ namespace Store.Controllers
         }
 
         [HttpGet("validate")]
-        public async Task<string> ValidateEmail(int UserId, string token)
+        public IActionResult ValidateEmail(int UserId, string token)
         {
-            return await Task.FromResult(_LoginRepository.ValidateEmail(UserId, token));
+            var message = _LoginRepository.ValidateEmail(UserId, token);
+            var User = _LoginRepository.GetUserById(UserId);
+            return Json(new { message, User });
+        }
+
+        [HttpPost("resetpassword")]
+        [Authorize()]
+        public IActionResult ResetPassword(string email, string password, string newPassword)
+        {
+            var user = _LoginRepository.GetUser(email, password);
+            if (user != null && BCrypt.Net.BCrypt.Verify(password, user.Password))
+            {
+                var status = _LoginRepository.ResetPassword(user.UserId, newPassword);
+                return Json(new { status });
+            }
+            return Json(new { status = false });
         }
     }
 }
