@@ -50,13 +50,5 @@ namespace Store.Controllers
             var result = _AdminRepository.DeleteUser(userId);
             return Json(new { result });
         }
-
-        //[HttpPost("Country/Add")]
-        //[Authorize(Roles = "admin")]
-        //public object AddCountry(Country country)
-        //{
-
-        //    return Ok(new {  });
-        //}
     }
 }

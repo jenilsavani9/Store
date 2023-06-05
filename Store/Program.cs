@@ -26,6 +26,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<StoreContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<IAdminRepository, AdminRepository>();
 builder.Services.AddScoped<ILoginRepository, LoginRepository>();
+builder.Services.AddScoped<IHomeRepository, HomeRepository>();
 
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
