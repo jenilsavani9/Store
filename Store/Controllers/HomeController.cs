@@ -25,11 +25,35 @@ namespace Store.Controllers
             return Json(new {result});
         }
 
+        [HttpGet("{StoreId:int}")]
+        [Authorize()]
+        public IActionResult GetStoresById(int StoreId)
+        {
+            var result = _HomeRepository.GetStoresById(StoreId);
+            return Json(new { result });
+        }
+
         [HttpPost("")]
         [Authorize()]
         public IActionResult AddStores(StoresModel obj)
         {
             object? result = _HomeRepository.AddStores(obj);
+            return Json(new { result });
+        }
+
+        [HttpPost("{StoreId:int}")]
+        [Authorize()]
+        public IActionResult EditStores(StoresModel obj)
+        {
+            object? result = _HomeRepository.EditStores(obj);
+            return Json(new { result });
+        }
+
+        [HttpDelete("{StoreId:int}")]
+        [Authorize()]
+        public IActionResult DeleteStore(int StoreId)
+        {
+            var result = _HomeRepository.DeleteStores(StoreId);
             return Json(new { result });
         }
 
@@ -41,5 +65,7 @@ namespace Store.Controllers
             object countries = _HomeRepository.GetCountry();
             return Json(new { cities, states, countries });
         }
+
+
     }
 }

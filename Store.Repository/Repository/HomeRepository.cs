@@ -22,10 +22,30 @@ namespace Store.Repository.Repository
         public object GetStores(int UserId)
         {
             var result = from r in _db.UserStores 
-                         where r.UserId == UserId 
+                         where r.UserId == UserId && r.Status == "active"
                          select new
                          {
                              r.StoreId, 
+                             r.UserId,
+                             r.StoreName,
+                             r.Address,
+                             r.Country.CountryName,
+                             r.City.CityName,
+                             r.State.StateName,
+                             r.PostalCode,
+                             r.LocationLink,
+                             r.Status
+                         };
+            return result;
+        }
+
+        public object GetStoresById(int StoreId)
+        {
+            var result = from r in _db.UserStores
+                         where r.StoreId == StoreId
+                         select new
+                         {
+                             r.StoreId,
                              r.UserId,
                              r.StoreName,
                              r.Address,
@@ -56,6 +76,40 @@ namespace Store.Repository.Repository
             _db.UserStores.Add(store);
             _db.SaveChanges();
             return store;
+        }
+
+        public object EditStores(StoresModel obj)
+        {
+            var store = _db.UserStores.FirstOrDefault(item=>item.StoreId == obj.StoreId);
+            if(store == null)
+            {
+                return null!;
+            }
+            store.StoreName = obj.StoreName;
+            store.Address = obj.Address;
+            store.CityId = obj.CityId;
+            store.StateId = obj.StateId;
+            store.CountryId = obj.CountryId;
+            store.PostalCode = obj.PostalCode;
+            store.LocationLink = obj.LocationLink;
+            _db.SaveChanges();
+            return store;
+        }
+
+        public object DeleteStores(int StoreId)
+        {
+            var result = _db.UserStores.FirstOrDefault(item => item.StoreId == StoreId);
+            if (result == null)
+            {
+                return null!;
+            }
+            else
+            {
+                result.Status = "deactive";
+                result.UpdatedAt = DateTime.Now;
+                _db.SaveChanges();
+                return result;
+            }
         }
 
         public object GetCities()

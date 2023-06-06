@@ -11,7 +11,13 @@ namespace Store.Repository.Interface
     {
         public object GetStores(int UserId);
 
+        public object GetStoresById(int StoreId);
+
         public object AddStores(StoresModel obj);
+
+        public object EditStores(StoresModel obj);
+
+        public object DeleteStores(int StoreId);
 
         public object GetCities();
 
