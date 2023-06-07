@@ -28,6 +28,8 @@ public partial class StoreContext : DbContext
 
     public virtual DbSet<UserStore> UserStores { get; set; }
 
+    
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<City>(entity =>
@@ -37,11 +39,7 @@ public partial class StoreContext : DbContext
             entity.ToTable("City");
 
             entity.Property(e => e.CityName).HasMaxLength(50);
-            entity.Property(e => e.CreatedAt)
-                .HasDefaultValueSql("(getdate())")
-                .HasColumnType("datetime");
-            entity.Property(e => e.DeletedAt).HasColumnType("datetime");
-            entity.Property(e => e.UpdatedAt).HasColumnType("datetime");
+          
 
             entity.HasOne(d => d.Country).WithMany(p => p.Cities)
                 .HasForeignKey(d => d.CountryId)
@@ -54,6 +52,12 @@ public partial class StoreContext : DbContext
                 .HasConstraintName("FK__City__StateId__4E88ABD4");
         });
 
+        modelBuilder.Entity<Roles>(entity =>
+        {
+            entity.HasKey(e => e.RolesId);
+            entity.Property(e => e.RolesName).HasMaxLength(50);
+        });
+
         modelBuilder.Entity<Country>(entity =>
         {
             entity.HasKey(e => e.CountryId).HasName("PK__Country__10D1609FC8DC8B72");
@@ -61,11 +65,7 @@ public partial class StoreContext : DbContext
             entity.ToTable("Country");
 
             entity.Property(e => e.CountryName).HasMaxLength(50);
-            entity.Property(e => e.CreatedAt)
-                .HasDefaultValueSql("(getdate())")
-                .HasColumnType("datetime");
-            entity.Property(e => e.DeletedAt).HasColumnType("datetime");
-            entity.Property(e => e.UpdatedAt).HasColumnType("datetime");
+           
         });
 
         modelBuilder.Entity<MailToken>(entity =>
@@ -79,7 +79,6 @@ public partial class StoreContext : DbContext
                 .HasColumnType("datetime");
             entity.Property(e => e.DeletedAt).HasColumnType("datetime");
             entity.Property(e => e.Token).HasMaxLength(50);
-            entity.Property(e => e.UpdatedAt).HasColumnType("datetime");
 
             entity.HasOne(d => d.User).WithMany(p => p.MailTokens)
                 .HasForeignKey(d => d.UserId)
@@ -93,12 +92,8 @@ public partial class StoreContext : DbContext
 
             entity.ToTable("State");
 
-            entity.Property(e => e.CreatedAt)
-                .HasDefaultValueSql("(getdate())")
-                .HasColumnType("datetime");
-            entity.Property(e => e.DeletedAt).HasColumnType("datetime");
+            
             entity.Property(e => e.StateName).HasMaxLength(50);
-            entity.Property(e => e.UpdatedAt).HasColumnType("datetime");
 
             entity.HasOne(d => d.Country).WithMany(p => p.States)
                 .HasForeignKey(d => d.CountryId)
@@ -117,7 +112,6 @@ public partial class StoreContext : DbContext
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
-            entity.Property(e => e.DeletedAt).HasColumnType("datetime");
             entity.Property(e => e.Email).HasMaxLength(128);
             entity.Property(e => e.FirstName).HasMaxLength(50);
             entity.Property(e => e.LastName).HasMaxLength(50);
@@ -134,7 +128,6 @@ public partial class StoreContext : DbContext
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
-            entity.Property(e => e.DeletedAt).HasColumnType("datetime");
             entity.Property(e => e.LocationLink).HasMaxLength(255);
             entity.Property(e => e.Status).HasMaxLength(50);
             entity.Property(e => e.StoreName).HasMaxLength(50);

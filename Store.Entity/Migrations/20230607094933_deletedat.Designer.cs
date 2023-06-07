@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Store.Entity.Data;
 
@@ -11,9 +12,11 @@ using Store.Entity.Data;
 namespace Store.Entity.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    partial class StoreContextModelSnapshot : ModelSnapshot
+    [Migration("20230607094933_deletedat")]
+    partial class deletedat
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -99,25 +102,6 @@ namespace Store.Entity.Migrations
                     b.ToTable("MailToken", (string)null);
                 });
 
-            modelBuilder.Entity("Store.Entity.Models.Roles", b =>
-                {
-                    b.Property<int>("RolesId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnOrder(0);
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RolesId"));
-
-                    b.Property<string>("RolesName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("RolesId");
-
-                    b.ToTable("Roles");
-                });
-
             modelBuilder.Entity("Store.Entity.Models.State", b =>
                 {
                     b.Property<long>("StateId")
@@ -175,8 +159,9 @@ namespace Store.Entity.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<int>("Roles")
-                        .HasColumnType("int");
+                    b.Property<string>("Roles")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Status")
                         .IsRequired()

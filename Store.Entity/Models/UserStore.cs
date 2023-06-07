@@ -29,8 +29,6 @@ public partial class UserStore
 
     public DateTime? UpdatedAt { get; set; }
 
-    public DateTime? DeletedAt { get; set; }
-
     public virtual City City { get; set; } = null!;
 
     public virtual Country Country { get; set; } = null!;

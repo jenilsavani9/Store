@@ -9,12 +9,6 @@ public partial class Country
 
     public string? CountryName { get; set; }
 
-    public DateTime CreatedAt { get; set; }
-
-    public DateTime? UpdatedAt { get; set; }
-
-    public DateTime? DeletedAt { get; set; }
-
     public virtual ICollection<City> Cities { get; set; } = new List<City>();
 
     public virtual ICollection<State> States { get; set; } = new List<State>();

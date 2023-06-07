@@ -75,7 +75,8 @@ namespace Store.Repository.Repository
             };
             _db.UserStores.Add(store);
             _db.SaveChanges();
-            return store;
+            var result = GetStoresById((int)store.StoreId);
+            return result;
         }
 
         public object EditStores(StoresModel obj)

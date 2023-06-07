@@ -20,7 +20,7 @@ namespace Store.Repository.Repository
 
         public User GetUser(string Email, string Password)
         {
-            return _db.Users.FirstOrDefault(u => u.Email == Email && u.DeletedAt == null && u.Status == "active")!;
+            return _db.Users.FirstOrDefault(u => u.Email == Email && u.Status == "active")!;
         }
 
         public bool ValidateEmail(int UserId, string token)
@@ -36,7 +36,7 @@ namespace Store.Repository.Repository
                 _db.SaveChanges();
                 return false;
             }
-            var user = _db.Users.FirstOrDefault(u => u.UserId == Entry.UserId && u.DeletedAt == null);
+            var user = _db.Users.FirstOrDefault(u => u.UserId == Entry.UserId && u.Status == "active");
             if(user == null)
             {
                 return false;

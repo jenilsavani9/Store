@@ -11,12 +11,6 @@ public partial class State
 
     public string? StateName { get; set; }
 
-    public DateTime CreatedAt { get; set; }
-
-    public DateTime? UpdatedAt { get; set; }
-
-    public DateTime? DeletedAt { get; set; }
-
     public virtual ICollection<City> Cities { get; set; } = new List<City>();
 
     public virtual Country Country { get; set; } = null!;

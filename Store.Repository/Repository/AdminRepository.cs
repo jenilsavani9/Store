@@ -37,7 +37,7 @@ namespace Store.Repository.Repository
                 TempUser.Email = user.Email;
                 TempUser.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
                 TempUser.Status = "pending";
-                TempUser.Roles = "customer";
+                TempUser.Roles = 2;
                 _db.Users.Add(TempUser);
                 _db.SaveChanges();
 
@@ -128,7 +128,7 @@ namespace Store.Repository.Repository
                 return "User Already Deleted";
             }
             user.Status = "deactive";
-            user.DeletedAt = DateTime.Now;
+            user.UpdatedAt = DateTime.Now;
             _db.SaveChanges();
             return "User Deleted Successfully";
         }
