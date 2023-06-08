@@ -28,7 +28,9 @@ public partial class StoreContext : DbContext
 
     public virtual DbSet<UserStore> UserStores { get; set; }
 
-    
+    public virtual DbSet<Features> Features { get; set; }
+
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

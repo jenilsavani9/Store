@@ -94,7 +94,8 @@ namespace Store.Repository.Repository
             store.PostalCode = obj.PostalCode;
             store.LocationLink = obj.LocationLink;
             _db.SaveChanges();
-            return store;
+            var result = GetStoresById((int)store.StoreId);
+            return result;
         }
 
         public object DeleteStores(int StoreId)

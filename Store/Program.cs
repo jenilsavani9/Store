@@ -27,6 +27,7 @@ builder.Services.AddDbContext<StoreContext>(options => options.UseSqlServer(buil
 builder.Services.AddScoped<IAdminRepository, AdminRepository>();
 builder.Services.AddScoped<ILoginRepository, LoginRepository>();
 builder.Services.AddScoped<IHomeRepository, HomeRepository>();
+builder.Services.AddScoped<IFeaturesRepository, FeaturesRepository>();
 
 builder.Services.AddControllers().AddJsonOptions(options =>
 {

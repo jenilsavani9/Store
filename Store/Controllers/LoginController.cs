@@ -33,8 +33,7 @@ namespace Store.Controllers
                 {
                     return Ok("Verify your Email.");
                 }
-                //&& BCrypt.Net.BCrypt.Verify(UserData.Password, user.Password)
-                if (user != null)
+                if (user != null && BCrypt.Net.BCrypt.Verify(UserData.Password, user.Password))
                 {
                     if (UserData.LastLogin != null)
                     {
