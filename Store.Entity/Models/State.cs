@@ -1,19 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Store.Entity.Models;
-
-public partial class State
+namespace Store.Entity.Models
 {
-    public long StateId { get; set; }
+    public class State
+    {
+        [Key]
+        public int StateId { get; set; }
 
-    public long CountryId { get; set; }
+        [ForeignKey("Country")]
+        public int CountryId { get; set; }
 
-    public string? StateName { get; set; }
-
-    public virtual ICollection<City> Cities { get; set; } = new List<City>();
-
-    public virtual Country Country { get; set; } = null!;
-
-    public virtual ICollection<UserStore> UserStores { get; set; } = new List<UserStore>();
+        [Required]
+        [StringLength(maximumLength: 50)]
+        public string StateName { get; set; } = null!;
+    }
 }

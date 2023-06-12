@@ -29,7 +29,7 @@ namespace Store.Controllers
             if (UserData != null && UserData.EmailId != null && UserData.Password != null)
             {
                 var user = _LoginRepository.GetUser(UserData.EmailId, UserData.Password);
-                if (user != null && user.Status == "Pending")
+                if (user != null && user.Status == Entity.Models.Status.pending)
                 {
                     return Ok("Verify your Email.");
                 }

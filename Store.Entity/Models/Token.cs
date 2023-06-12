@@ -8,23 +8,19 @@ using System.Threading.Tasks;
 
 namespace Store.Entity.Models
 {
-    public class Features
+    public class Token
     {
         [Key]
-        public long FeaturesId { get; set; }
+        public int TokenId { get; set; }
 
         [ForeignKey("User")]
         public int UserId { get; set; }
 
         [Required]
-        public string? FeaturesName { get; set;}
-
-        public string? FeaturesDescription { get; set;}
+        public string MailToken { get; set; } = null!;
 
         [Required]
-        public bool Status { get; set; }
-
-        public DateTime CreatedAt { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
 
         public DateTime? UpdatedAt { get; set; }
     }

@@ -21,19 +21,19 @@ namespace Store.Repository.Repository
 
         public object GetStores(int UserId)
         {
-            var result = from r in _db.UserStores 
-                         where r.UserId == UserId && r.Status == "active"
+            var result = from r in _db.UserStores
+                         where r.UserId == UserId && r.Status == true
                          select new
                          {
-                             r.StoreId, 
+                             r.StoreId,
                              r.UserId,
                              r.StoreName,
-                             r.Address,
-                             r.Country.CountryName,
-                             r.City.CityName,
-                             r.State.StateName,
                              r.PostalCode,
                              r.LocationLink,
+                             r.Address.AddressLine1,
+                             r.Address.AddressLine2,
+                             r.City.CityName,
+                             r.Country.CountryName,
                              r.Status
                          };
             return result;
@@ -48,12 +48,12 @@ namespace Store.Repository.Repository
                              r.StoreId,
                              r.UserId,
                              r.StoreName,
-                             r.Address,
-                             r.Country.CountryName,
-                             r.City.CityName,
-                             r.State.StateName,
                              r.PostalCode,
                              r.LocationLink,
+                             r.Address.AddressLine1,
+                             r.Address.AddressLine2,
+                             r.City.CityName,
+                             r.Country.CountryName,
                              r.Status
                          };
             return result;
@@ -61,38 +61,58 @@ namespace Store.Repository.Repository
 
         public object AddStores(StoresModel obj)
         {
+            Address address = new()
+            {
+                AddressLine1 = obj.AddressLine1,
+                AddressLine2 = obj.AddressLine2
+            };
+            _db.Addresses.Add(address);
+            _db.SaveChanges();
             UserStore store = new()
             {
                 UserId = obj.UserId,
                 StoreName = obj.StoreName,
-                Address = obj.Address,
                 CountryId = obj.CountryId,
                 StateId = obj.StateId,
                 CityId = obj.CityId,
                 PostalCode = obj.PostalCode,
                 LocationLink = obj.LocationLink,
-                Status = "active"
+                AddressId = address.AddressId,
+                Status = true
             };
             _db.UserStores.Add(store);
             _db.SaveChanges();
+
             var result = GetStoresById((int)store.StoreId);
             return result;
         }
 
         public object EditStores(StoresModel obj)
         {
-            var store = _db.UserStores.FirstOrDefault(item=>item.StoreId == obj.StoreId);
-            if(store == null)
+            var store = _db.UserStores.FirstOrDefault(item => item.StoreId == obj.StoreId);
+            if (store == null)
             {
                 return null!;
             }
             store.StoreName = obj.StoreName;
-            store.Address = obj.Address;
-            store.CityId = obj.CityId;
-            store.StateId = obj.StateId;
-            store.CountryId = obj.CountryId;
+
+            //store.CityId = obj.CityId;
+            //store.StateId = obj.StateId;
+            //store.CountryId = obj.CountryId;
             store.PostalCode = obj.PostalCode;
             store.LocationLink = obj.LocationLink;
+            store.UpdatedAt = DateTime.Now;
+
+            var address = _db.Addresses.FirstOrDefault(item => item.AddressId == store.AddressId);
+            if (address != null)
+            {
+                if (obj.AddressLine1 != null)
+                {
+                    address.AddressLine1 = obj.AddressLine1;
+                }
+                address.AddressLine2 = obj.AddressLine2;
+            }
+
             _db.SaveChanges();
             var result = GetStoresById((int)store.StoreId);
             return result;
@@ -107,7 +127,7 @@ namespace Store.Repository.Repository
             }
             else
             {
-                result.Status = "deactive";
+                result.Status = false;
                 result.UpdatedAt = DateTime.Now;
                 _db.SaveChanges();
                 return result;
@@ -133,7 +153,7 @@ namespace Store.Repository.Repository
                          select new
                          {
                              c.StateId,
-                             c.StateName, 
+                             c.StateName,
                              c.CountryId
                          };
             return states;
@@ -142,11 +162,11 @@ namespace Store.Repository.Repository
         public object GetCountry()
         {
             var countrys = from c in _db.Countries
-                         select new
-                         {
-                             c.CountryId,
-                             c.CountryName
-                         };
+                           select new
+                           {
+                               c.CountryId,
+                               c.CountryName
+                           };
             return countrys;
         }
     }

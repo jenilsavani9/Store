@@ -5,7 +5,7 @@
 namespace Store.Entity.Migrations
 {
     /// <inheritdoc />
-    public partial class LastLoginNull : Migration
+    public partial class ChangeAddressForeignKey : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

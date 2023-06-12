@@ -36,8 +36,8 @@ namespace Store.Repository.Repository
                 TempUser.LastName = user.LastName;
                 TempUser.Email = user.Email;
                 TempUser.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
-                TempUser.Status = "pending";
-                TempUser.Roles = 2;
+                TempUser.Status = Status.pending;
+                TempUser.Roles = Roles.customer;
                 _db.Users.Add(TempUser);
                 _db.SaveChanges();
 
@@ -59,14 +59,14 @@ namespace Store.Repository.Repository
             {
                 return false;
             }
-            var EmailValid = new MailToken
+            var EmailValid = new Token
             {
                 UserId = TempUser.UserId,
-                Token = token,
+                MailToken = token,
                 CreatedAt = DateTime.Now,
             };
 
-            _db.MailTokens.Add(EmailValid);
+            _db.Tokens.Add(EmailValid);
             _db.SaveChanges();
 
             var resetLink = "http://localhost:3000/verify?UserId=" + TempUser.UserId + "&token=" + token;
@@ -123,11 +123,11 @@ namespace Store.Repository.Repository
             {
                 return "User Not Found";
             }
-            if(user.Status == "deactive")
+            if(user.Status == Status.deactive)
             {
-                return "User Already Deleted";
+                return "User is Deactive";
             }
-            user.Status = "deactive";
+            user.Status = Status.deactive;
             user.UpdatedAt = DateTime.Now;
             _db.SaveChanges();
             return "User Deleted Successfully";

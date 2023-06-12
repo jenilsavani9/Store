@@ -8,7 +8,7 @@ namespace Store.Entity.ViewModels
 {
     public class FeatureModel
     {
-        public long FeaturesId { get; set; }
+        public int FeaturesId { get; set; }
 
         public int UserId { get; set; }
 

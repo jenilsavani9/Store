@@ -21,7 +21,7 @@ namespace Store.Controllers
         }
 
         [HttpPost("User/Add")]
-        [Authorize(Roles = "1")]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult<AddUserModel>> AddUser(AddUserModel user)
         {
             var TempUser = _AdminRepository.GetUserByEmail(user.Email);
@@ -35,7 +35,7 @@ namespace Store.Controllers
         }
 
         [HttpPost("User/Get")]
-        [Authorize(Roles = "1")]
+        [Authorize(Roles = "admin")]
         public IActionResult GetUsers(int pageIndex, string search)
         {
             var result = _AdminRepository.GetUsersList(pageIndex, search);
@@ -44,7 +44,7 @@ namespace Store.Controllers
         }
 
         [HttpPost("User/Delete")]
-        [Authorize(Roles = "1")]
+        [Authorize(Roles = "admin")]
         public IActionResult DeleteUsers(int userId)
         {
             var result = _AdminRepository.DeleteUser(userId);

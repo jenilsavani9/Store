@@ -8,21 +8,23 @@ namespace Store.Entity.ViewModels
 {
     public class StoresModel
     {
-        public long StoreId { get; set; }
+        public int StoreId { get; set; }
 
-        public long UserId { get; set; }
+        public int UserId { get; set; }
 
         public string? StoreName { get; set; }
 
-        public string? Address { get; set; }
+        public string? AddressLine1 { get; set; }
 
-        public long CountryId { get; set; }
+        public string? AddressLine2 { get; set; }
 
-        public long StateId { get; set; }
+        public int CountryId { get; set; }
 
-        public long CityId { get; set; }
+        public int StateId { get; set; }
 
-        public int? PostalCode { get; set; }
+        public int CityId { get; set; }
+
+        public string? PostalCode { get; set; }
 
         public string? LocationLink { get; set; }
 

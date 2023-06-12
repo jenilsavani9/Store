@@ -26,9 +26,9 @@ namespace Store.Repository.Repository
                          select new
                          {
                              f.UserId,
-                             f.FeaturesName,
-                             f.FeaturesId,
-                             f.FeaturesDescription,
+                             f.FeatureName,
+                             f.FeatureId,
+                             f.FeatureDescription,
                              f.Status,
                          };
             return result;
@@ -37,13 +37,13 @@ namespace Store.Repository.Repository
         public object GetFeaturesById(int FeatureId)
         {
             var result = from f in _db.Features
-                         where f.FeaturesId == FeatureId && f.Status == true
+                         where f.FeatureId == FeatureId && f.Status == true
                          select new
                          {
                              f.UserId,
-                             f.FeaturesName,
-                             f.FeaturesId,
-                             f.FeaturesDescription,
+                             f.FeatureName,
+                             f.FeatureId,
+                             f.FeatureDescription,
                              f.Status,
                          };
             return result;
@@ -51,36 +51,36 @@ namespace Store.Repository.Repository
 
         public object AddFeatures(FeatureModel obj)
         {
-            Features feature = new();
+            Feature feature = new();
             feature.UserId = obj.UserId;
-            feature.FeaturesName = obj.FeaturesName;
-            feature.FeaturesDescription = obj.FeaturesDescription;
+            feature.FeatureName = obj.FeaturesName;
+            feature.FeatureDescription = obj.FeaturesDescription;
             feature.Status = true;
             feature.CreatedAt = DateTime.Now;
             _db.Features.Add(feature);
             _db.SaveChanges();
-            var result = GetFeaturesById((int)feature.FeaturesId);
+            var result = GetFeaturesById((int)feature.FeatureId);
             return result;
         }
 
         public object EditFeatures(FeatureModel obj)
         {
-            var result = _db.Features.FirstOrDefault(f => f.FeaturesId == obj.FeaturesId && f.Status == true);
+            var result = _db.Features.FirstOrDefault(f => f.FeatureId == obj.FeaturesId && f.Status == true);
             if (result == null)
             {
                 return null!;
             }
-            result.FeaturesName = obj.FeaturesName;
-            result.FeaturesDescription = obj.FeaturesDescription;
+            result.FeatureName = obj.FeaturesName;
+            result.FeatureDescription = obj.FeaturesDescription;
             result.UpdatedAt = DateTime.Now;
             _db.SaveChanges();
-            var Tempresult = GetFeaturesById((int)result.FeaturesId);
+            var Tempresult = GetFeaturesById((int)result.FeatureId);
             return Tempresult;
         }
 
         public object DeleteFeatures(int FetureId)
         {
-            var result = _db.Features.FirstOrDefault(f => f.FeaturesId == FetureId && f.Status == true);
+            var result = _db.Features.FirstOrDefault(f => f.FeatureId == FetureId && f.Status == true);
             if(result == null)
             {
                 return null!;

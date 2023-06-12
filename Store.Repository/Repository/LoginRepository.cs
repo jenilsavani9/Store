@@ -20,29 +20,29 @@ namespace Store.Repository.Repository
 
         public User GetUser(string Email, string Password)
         {
-            return _db.Users.FirstOrDefault(u => u.Email == Email && u.Status == "active")!;
+            return _db.Users.FirstOrDefault(u => u.Email == Email && u.Status == Status.active)!;
         }
 
         public bool ValidateEmail(int UserId, string token)
         {
-            var Entry = _db.MailTokens.FirstOrDefault(e => e.UserId == UserId && e.DeletedAt == null);
-            if (Entry == null || Entry!.Token != token)
+            var Entry = _db.Tokens.FirstOrDefault(e => e.UserId == UserId && e.UpdatedAt == null);
+            if (Entry == null || Entry!.MailToken != token)
             {
                 return false;
             }
             if(Entry.CreatedAt.AddHours(24) <= DateTime.Now)
             {
-                Entry.DeletedAt = DateTime.Now;
+                Entry.UpdatedAt = DateTime.Now;
                 _db.SaveChanges();
                 return false;
             }
-            var user = _db.Users.FirstOrDefault(u => u.UserId == Entry.UserId && u.Status == "active");
+            var user = _db.Users.FirstOrDefault(u => u.UserId == Entry.UserId && u.Status == Status.pending);
             if(user == null)
             {
                 return false;
             }
-            user.Status = "active";
-            Entry.DeletedAt = DateTime.Now;
+            user.Status = Status.active;
+            Entry.UpdatedAt = DateTime.Now;
             _db.SaveChanges();
             return true;
 
