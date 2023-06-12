@@ -20,7 +20,7 @@ namespace Store.Entity.Models
         public int StateId { get; set; }
 
         [Required]
-        [StringLength(maximumLength: 50)]
+        [StringLength(maximumLength: 100)]
         public string CityName { get; set; } = null!;
     }
 }

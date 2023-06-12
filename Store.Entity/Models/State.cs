@@ -17,7 +17,7 @@ namespace Store.Entity.Models
         public int CountryId { get; set; }
 
         [Required]
-        [StringLength(maximumLength: 50)]
+        [StringLength(maximumLength: 100)]
         public string StateName { get; set; } = null!;
     }
 }

@@ -12,8 +12,8 @@ using Store.Entity.Data;
 namespace Store.Entity.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20230612091200_Change Address Foreign Key")]
-    partial class ChangeAddressForeignKey
+    [Migration("20230612122050_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,9 +44,6 @@ namespace Store.Entity.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("StoreId")
-                        .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -234,7 +231,8 @@ namespace Store.Entity.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StoreId"));
 
-                    b.Property<int>("AddressId")
+                    b.Property<int?>("AddressId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<int?>("CityId")

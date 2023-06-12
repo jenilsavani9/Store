@@ -136,7 +136,7 @@ namespace Store.Repository.Repository
 
         public object GetCities()
         {
-            var cities = from c in _db.Cities
+            var cities = from c in _db.Cities.OrderBy(item => item.CityName)
                          select new
                          {
                              c.CityId,
@@ -144,12 +144,13 @@ namespace Store.Repository.Repository
                              c.StateId,
                              c.CountryId
                          };
+
             return cities;
         }
 
         public object GetStates()
         {
-            var states = from c in _db.States
+            var states = from c in _db.States.OrderBy(item => item.StateName)
                          select new
                          {
                              c.StateId,
@@ -161,7 +162,7 @@ namespace Store.Repository.Repository
 
         public object GetCountry()
         {
-            var countrys = from c in _db.Countries
+            var countrys = from c in _db.Countries.OrderBy(item => item.CountryName)
                            select new
                            {
                                c.CountryId,

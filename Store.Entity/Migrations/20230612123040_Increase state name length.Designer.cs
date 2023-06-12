@@ -12,8 +12,8 @@ using Store.Entity.Data;
 namespace Store.Entity.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20230612092945_Change Address column")]
-    partial class ChangeAddresscolumn
+    [Migration("20230612123040_Increase state name length")]
+    partial class Increasestatenamelength
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -142,8 +142,8 @@ namespace Store.Entity.Migrations
 
                     b.Property<string>("StateName")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("StateId");
 
@@ -232,6 +232,7 @@ namespace Store.Entity.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StoreId"));
 
                     b.Property<int?>("AddressId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<int?>("CityId")
@@ -271,6 +272,8 @@ namespace Store.Entity.Migrations
 
                     b.HasKey("StoreId");
 
+                    b.HasIndex("AddressId");
+
                     b.HasIndex("CityId");
 
                     b.HasIndex("CountryId");
@@ -284,6 +287,12 @@ namespace Store.Entity.Migrations
 
             modelBuilder.Entity("Store.Entity.Models.UserStore", b =>
                 {
+                    b.HasOne("Store.Entity.Models.Address", "Address")
+                        .WithMany()
+                        .HasForeignKey("AddressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Store.Entity.Models.City", "City")
                         .WithMany()
                         .HasForeignKey("CityId")
@@ -307,6 +316,8 @@ namespace Store.Entity.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Address");
 
                     b.Navigation("City");
 

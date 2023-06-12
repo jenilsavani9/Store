@@ -25,7 +25,7 @@ namespace Store.Entity.Models
 
         [ForeignKey("State")]
         public int? StateId { get; set; }
-                        
+
         [ForeignKey("City")]
         public int? CityId { get; set; }
 
