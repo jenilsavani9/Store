@@ -32,6 +32,10 @@ namespace Store.Repository.Repository
                              r.LocationLink,
                              r.Address.AddressLine1,
                              r.Address.AddressLine2,
+                             r.CityId,
+                             r.StateId,
+                             r.CountryId,
+                             r.State.StateName,
                              r.City.CityName,
                              r.Country.CountryName,
                              r.Status
@@ -52,6 +56,10 @@ namespace Store.Repository.Repository
                              r.LocationLink,
                              r.Address.AddressLine1,
                              r.Address.AddressLine2,
+                             r.CityId,
+                             r.StateId,
+                             r.CountryId,
+                             r.State.StateName,
                              r.City.CityName,
                              r.Country.CountryName,
                              r.Status

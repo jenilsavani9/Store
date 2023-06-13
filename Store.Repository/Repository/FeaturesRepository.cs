@@ -87,6 +87,10 @@ namespace Store.Repository.Repository
             }
             result.Status = false;
             result.UpdatedAt = DateTime.Now;
+
+            // for delete store features
+            var storeFeature = _db.StoreFeatures.Where(f => f.FeatureId == FetureId).ToList();
+            _db.StoreFeatures.RemoveRange(storeFeature);
             _db.SaveChanges();
             return result;
         }

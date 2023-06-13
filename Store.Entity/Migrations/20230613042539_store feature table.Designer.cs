@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Store.Entity.Data;
 
@@ -11,9 +12,11 @@ using Store.Entity.Data;
 namespace Store.Entity.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    partial class StoreContextModelSnapshot : ModelSnapshot
+    [Migration("20230613042539_store feature table")]
+    partial class storefeaturetable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -158,18 +161,10 @@ namespace Store.Entity.Migrations
                     b.Property<int>("FeatureId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
-
                     b.Property<int>("StoreId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("StoreFeatureId");
-
-                    b.HasIndex("FeatureId");
 
                     b.ToTable("StoreFeatures");
                 });
@@ -307,17 +302,6 @@ namespace Store.Entity.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("UserStores");
-                });
-
-            modelBuilder.Entity("Store.Entity.Models.StoreFeature", b =>
-                {
-                    b.HasOne("Store.Entity.Models.Feature", "Features")
-                        .WithMany()
-                        .HasForeignKey("FeatureId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Features");
                 });
 
             modelBuilder.Entity("Store.Entity.Models.UserStore", b =>
