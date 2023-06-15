@@ -12,5 +12,7 @@ namespace Store.Repository.Interface
         public bool SaveFilePath(string filePath, int UserId);
 
         public City FindCityId(string CityName);
+
+        public int AddStoreAddress(string AddressLine1, string AddressLine2);
     }
 }

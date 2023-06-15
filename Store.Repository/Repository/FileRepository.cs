@@ -22,7 +22,7 @@ namespace Store.Repository.Repository
         {
             try
             {
-                if(filePath != null)
+                if (filePath != null)
                 {
                     _db.StoreFiles.Add(new Entity.Models.StoreFile
                     {
@@ -30,12 +30,13 @@ namespace Store.Repository.Repository
                         UserId = UserId
                     });
                     _db.SaveChanges();
-                } else
+                }
+                else
                 {
                     throw new Exception();
                 }
                 return true;
-            } 
+            }
             catch (Exception)
             {
                 return false;
@@ -53,9 +54,26 @@ namespace Store.Repository.Repository
                 }
                 return id;
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return null;
+            }
+        }
+
+        public int AddStoreAddress(string AddressLine1, string AddressLine2)
+        {
+            try
+            {
+                Address address = new Address();
+                address.AddressLine1 = AddressLine1;
+                address.AddressLine2 = AddressLine2;
+                _db.Addresses.Add(address);
+                _db.SaveChanges();
+                return address.AddressId;
+            }
+            catch (Exception)
+            {
+                return -1;
             }
         }
     }

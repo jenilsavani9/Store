@@ -74,7 +74,7 @@ namespace Store.Controllers
                     
 
 
-                    while (!csvReader.EndOfData)
+                    for(int j=0; j<csvReader.LineNumber; j++)
                     {
                         if (csvReader.ReadFields() != null)
                         {
@@ -98,6 +98,25 @@ namespace Store.Controllers
                             throw new Exception();
                         }
                     }
+
+
+
+                    //for address
+                    var addressData = csvData.Columns["AddressLine1"];
+                    DataColumn AddressDataColumn = new DataColumn("AddressId");
+                    csvData.Columns.Add(AddressDataColumn);
+                    if (addressData != null && addressData.Table!=null)
+                    {
+                        for (int i = 0; i < addressData.Table.Rows.Count; i++)
+                        {
+                            var data = csvData.Rows[i][Array.IndexOf(colFields, "AddressLine1")];
+                            var id = _FileRepository.AddStoreAddress(data.ToString(), "");
+                            csvData.Rows[i][csvData.Columns.IndexOf("AddressId")] = id;
+
+                        }
+                    }
+                    
+                    csvData.Columns.Remove("AddressLine1");
 
 
 
