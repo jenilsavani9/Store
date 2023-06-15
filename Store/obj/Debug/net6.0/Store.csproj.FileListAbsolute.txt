@@ -87,3 +87,4 @@ D:\jenil\Store\Store\bin\Debug\net6.0\Store.Repository.dll
 D:\jenil\Store\Store\bin\Debug\net6.0\Store.Entity.pdb
 D:\jenil\Store\Store\bin\Debug\net6.0\Store.Repository.pdb
 D:\jenil\Store\Store\bin\Debug\net6.0\Newtonsoft.Json.dll
+D:\jenil\Store\Store\bin\Debug\net6.0\Store.staticwebassets.runtime.json

@@ -1,11 +1,54 @@
 {
   "Version": 1,
-  "Hash": "IirhbX87qV95acTOJ5O3y6ccNsYDHJwDkgWmv9AcesQ=",
+  "Hash": "NngpBe7AKzZvCIuhodUYYfgtInbRr4NkWcqlKa5jbbE=",
   "Source": "Store",
   "BasePath": "_content/Store",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "Store\\wwwroot",
+      "Source": "Store",
+      "ContentRoot": "D:\\jenil\\Store\\Store\\wwwroot\\",
+      "BasePath": "_content/Store",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "D:\\jenil\\Store\\Store\\wwwroot\\CSV\\industry0a99417d-5d9c-40b4-aa93-6d025a4bc595.csv",
+      "SourceId": "Store",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\jenil\\Store\\Store\\wwwroot\\",
+      "BasePath": "_content/Store",
+      "RelativePath": "CSV/industry0a99417d-5d9c-40b4-aa93-6d025a4bc595.csv",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\CSV\\industry0a99417d-5d9c-40b4-aa93-6d025a4bc595.csv"
+    },
+    {
+      "Identity": "D:\\jenil\\Store\\Store\\wwwroot\\CSV\\industryaf446e87-45d2-417b-b844-206ccd1d544b.csv",
+      "SourceId": "Store",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\jenil\\Store\\Store\\wwwroot\\",
+      "BasePath": "_content/Store",
+      "RelativePath": "CSV/industryaf446e87-45d2-417b-b844-206ccd1d544b.csv",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\CSV\\industryaf446e87-45d2-417b-b844-206ccd1d544b.csv"
+    }
+  ]
 }

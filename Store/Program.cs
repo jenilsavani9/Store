@@ -29,6 +29,7 @@ builder.Services.AddScoped<ILoginRepository, LoginRepository>();
 builder.Services.AddScoped<IHomeRepository, HomeRepository>();
 builder.Services.AddScoped<IFeaturesRepository, FeaturesRepository>();
 builder.Services.AddScoped<IStoreFeatureRepository, StoreFeatureRepository>();
+builder.Services.AddScoped<IFileRepository, FileRepository>();
 
 builder.Services.AddControllers().AddJsonOptions(options =>
 {

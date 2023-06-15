@@ -29,5 +29,6 @@ namespace Store.Entity.Data
         public DbSet<City> Cities { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<StoreFeature> StoreFeatures { get; set; }
+        public DbSet<StoreFile> StoreFiles { get; set; }
     }
 }
