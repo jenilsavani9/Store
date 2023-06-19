@@ -41,7 +41,7 @@ namespace Store.Controllers
             return Json(new { result });
         }
 
-        [HttpPut("")]
+        [HttpPut("{FeatureId:int}")]
         [Authorize()]
         public IActionResult EditFeatures(FeatureModel obj)
         {
@@ -49,7 +49,7 @@ namespace Store.Controllers
             return Json(new { result });
         }
 
-        [HttpDelete("")]
+        [HttpDelete("{FeatureId:int}")]
         [Authorize()]
         public IActionResult DeleteFeatures(int FeatureId)
         {

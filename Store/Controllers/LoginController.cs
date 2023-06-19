@@ -64,7 +64,7 @@ namespace Store.Controllers
                 }
                 else
                 {
-                    return BadRequest("Invalid credentials");
+                    return Json(new { message = "Invalid credentials" });
                 }
             }
             else

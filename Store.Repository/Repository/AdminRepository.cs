@@ -95,7 +95,7 @@ namespace Store.Repository.Repository
         }
 
         // users list
-        public object GetUsersList(int pageIndex, string search)
+        public object GetUsersList(int pageIndex)
         {
             var users = from r in _db.Users.AsEnumerable() select new
             {

@@ -34,16 +34,16 @@ namespace Store.Controllers
             return await Task.FromResult(user);
         }
 
-        [HttpPost("User/Get")]
+        [HttpGet("User/Get")]
         [Authorize(Roles = "admin")]
-        public IActionResult GetUsers(int pageIndex, string search)
+        public IActionResult GetUsers(int pageIndex)
         {
-            var result = _AdminRepository.GetUsersList(pageIndex, search);
+            var result = _AdminRepository.GetUsersList(pageIndex);
             var userCount = _AdminRepository.GetUserCount();
             return Json(new { result, userCount });
         }
 
-        [HttpPost("User/Delete")]
+        [HttpDelete("User/Delete")]
         [Authorize(Roles = "admin")]
         public IActionResult DeleteUsers(int userId)
         {

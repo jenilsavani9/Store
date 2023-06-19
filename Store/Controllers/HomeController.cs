@@ -41,7 +41,7 @@ namespace Store.Controllers
             return Json(new { result });
         }
 
-        [HttpPost("{StoreId:int}")]
+        [HttpPut("{StoreId:int}")]
         [Authorize()]
         public IActionResult EditStores(StoresModel obj)
         {
