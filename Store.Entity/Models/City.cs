@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Store.Entity.Models
 {
-    public class City
+    public class City 
     {
         [Key]
         public int CityId { get; set; }

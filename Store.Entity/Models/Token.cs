@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Store.Entity.Models
 {
-    public class Token
+    public class Token: Generic
     {
         [Key]
         public int TokenId { get; set; }
@@ -19,9 +19,5 @@ namespace Store.Entity.Models
         [Required]
         public string MailToken { get; set; } = null!;
 
-        [Required]
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
-
-        public DateTime? UpdatedAt { get; set; }
     }
 }

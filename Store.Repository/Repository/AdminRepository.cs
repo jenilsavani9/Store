@@ -21,11 +21,8 @@ namespace Store.Repository.Repository
             _db = db;
         }
 
-        public User GetUserByEmail(string Email)
-        {
-            var result = _db.Users.FirstOrDefault(u => u.Email == Email);
-            return result;
-        }
+        public User GetUserByEmail(string Email) => _db.Users.FirstOrDefault(u => u.Email == Email);
+        
 
         public User AddUser(AddUserModel user)
         {
@@ -43,7 +40,7 @@ namespace Store.Repository.Repository
 
                 return TempUser;
             }
-            catch
+            catch(Exception)
             {
                 throw;
             }

@@ -17,17 +17,19 @@ namespace Store.Entity.Models
         admin, customer
     }
 
-    public class User
+    public class User: Generic
     {
         [Key]
         public int UserId { get; set; }
 
         [Required]
-        [StringLength(maximumLength: 20, MinimumLength = 5, ErrorMessage = "The property First Name should have 20 maximum characters and 5 minimum characters")]
+        [StringLength(maximumLength: 20, MinimumLength = 5, 
+            ErrorMessage = "The property First Name should have 20 maximum characters and 5 minimum characters")]
         public string FirstName { get; set; } = null!;
 
         [Required]
-        [StringLength(maximumLength: 20, MinimumLength = 5, ErrorMessage = "The property Last Name should have 20 maximum characters and 5 minimum characters")]
+        [StringLength(maximumLength: 20, MinimumLength = 5, 
+            ErrorMessage = "The property Last Name should have 20 maximum characters and 5 minimum characters")]
         public string LastName { get; set; } = null!;
 
         [Required]
@@ -43,9 +45,5 @@ namespace Store.Entity.Models
 
         public string? LastLogin { get; set; }
 
-        [Required]
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
-
-        public DateTime? UpdatedAt { get; set; }
     }
 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Store.Entity.Models
 {
-    public class Feature
+    public class Feature: Generic
     {
         [Key]
         public int FeatureId { get; set; }
@@ -24,9 +24,9 @@ namespace Store.Entity.Models
 
         public bool Status { get; set; }
 
-        [Required]
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
         public DateTime? UpdatedAt { get; set; }
+
     }
 }

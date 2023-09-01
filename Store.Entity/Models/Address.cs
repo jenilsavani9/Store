@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Store.Entity.Models
 {
-    public class Address
+    public class Address: Generic
     {
         [Key]
         public int AddressId { get; set; }
@@ -20,9 +20,9 @@ namespace Store.Entity.Models
         [StringLength(maximumLength: 255)]
         public string? AddressLine2 { get; set; }
 
-        [Required]
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
         public DateTime? UpdatedAt { get; set; }
+
     }
 }

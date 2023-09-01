@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Store.Entity.Models
 {
-    public class UserStore
+    public class UserStore: Generic
     {
         [Key]
         public int StoreId { get; set; }
@@ -17,7 +17,8 @@ namespace Store.Entity.Models
         public int UserId { get; set; }
 
         [Required]
-        [StringLength(maximumLength: 50, MinimumLength = 5, ErrorMessage = "The property Store Name should have 50 maximum characters and 5 minimum characters")]
+        [StringLength(maximumLength: 50, MinimumLength = 5, 
+            ErrorMessage = "The property Store Name should have 50 maximum characters and 5 minimum characters")]
         public string StoreName { get; set; } = null!;
 
         [ForeignKey("Country")]
@@ -32,17 +33,14 @@ namespace Store.Entity.Models
         [ForeignKey("Address")]
         public int? AddressId { get; set; }
 
-        [StringLength(maximumLength: 15, MinimumLength = 3, ErrorMessage = "The property Store Name should have 15 maximum characters and 3 minimum characters")]
+        [StringLength(maximumLength: 15, MinimumLength = 3, 
+            ErrorMessage = "The property Store Name should have 15 maximum characters and 3 minimum characters")]
         public string? PostalCode { get; set; }
 
         public string? LocationLink { get; set; }
 
         public bool Status { get; set; }
 
-        [Required]
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
-
-        public DateTime? UpdatedAt { get; set; }
 
         public virtual City City { get; set; } = null!;
 

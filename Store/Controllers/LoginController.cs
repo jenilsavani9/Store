@@ -31,7 +31,7 @@ namespace Store.Controllers
                 var user = _LoginRepository.GetUser(UserData.EmailId, UserData.Password);
                 if (user != null && user.Status == Entity.Models.Status.pending)
                 {
-                    return Ok("Verify your Email.");
+                    return Json(new { message = "Verify your Email." });
                 }
                 if (user != null && BCrypt.Net.BCrypt.Verify(UserData.Password, user.Password))
                 {
@@ -69,7 +69,7 @@ namespace Store.Controllers
             }
             else
             {
-                return BadRequest();
+                return Json(new { message = "Invalid credentials" });
             }
         }
 
